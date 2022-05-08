@@ -46,7 +46,6 @@ jmespath==0.10.0
 keyboard==0.13.5
 keyring==21.8.0
 kiwisolver==1.3.2
-lazy-object-proxy==0.0.0
 lockfile==0.12.2
 logilab-common==1.8.1
 louis==3.16.0
