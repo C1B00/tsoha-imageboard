@@ -77,7 +77,7 @@ def add_thread():
         return render_template("error.html", message="Viestin lähettäminen ei onnistunut")
     return redirect("/"+str(board_name))
 
-@app.route("/remove", methods=["GET", "POST"])
+@app.route("/remove_thread", methods=["GET", "POST"])
 def remove_thread():
     users.require_role(2)
 
@@ -88,6 +88,19 @@ def remove_thread():
         users.check_csrf()
         thread_id = request.form["thread_id"]
         messages.remove_thread(thread_id)
+    return redirect("/")
+
+@app.route("/remove_reply", methods=["GET", "POST"])
+def remove_reply():
+    users.require_role(2)
+
+    if request.method == "GET":
+        return render_template("remove.html")
+
+    if request.method == "POST":
+        users.check_csrf()
+        reply_id = request.form["reply_id"]
+        messages.remove_reply(reply_id)
     return redirect("/")
 
 @app.route("/add_reply", methods=["GET", "POST"])

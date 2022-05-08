@@ -36,7 +36,7 @@
             <p>
             <b>{{ thread[2] }}:</b> {{ thread[3] }}
             <p>
-            Käyttäjältä: <i>{{ thread[4] }}</i>, Aikaan: <i>{{ thread[5].strftime("%Y-%m-%d %H:%M:%S") }}</i>
+            <B>ID: {{ thread[0] }}</B>, Käyttäjältä: <i>{{ thread[4] }}</i>, Aikaan: <i>{{ thread[5].strftime("%Y-%m-%d %H:%M:%S") }}</i>
             <p>
             Vastauksia: <i>{{ count }}</i>
             <hr>
@@ -48,7 +48,7 @@
             <p>
             <b>{{ reply[2] }}</b> {{ reply[3] }}
             <p>
-            Käyttäjältä:<i> {{ reply[4] }}</i>, Aikaan: <i>{{ reply[5].strftime("%Y-%m-%d %H:%M:%S") }}</i>
+            <B>ID: {{ reply[0] }}</B>, Käyttäjältä:<i> {{ reply[4] }}</i>, Aikaan: <i>{{ reply[5].strftime("%Y-%m-%d %H:%M:%S") }}</i>
             <hr>
             {% endfor %}
         </div>

@@ -19,6 +19,11 @@ def remove_thread(thread_id):
     db.session.execute(sql, {"thread_id":thread_id})
     db.session.commit()
 
+def remove_reply(reply_id):
+    sql = "DELETE FROM replies WHERE id=:reply_id"
+    db.session.execute(sql, {"reply_id":reply_id})
+    db.session.commit()
+
 def show_all_threads(board_name):
     sql = "SELECT T.id, T.image_file, T.title, T.message, U.username, T.sent_at FROM threads T, users U WHERE T.board_name=:board_name AND U.id=T.user_id ORDER BY T.sent_at DESC"
     result = db.session.execute(sql, {"board_name":board_name})
