@@ -66,6 +66,9 @@ def add_thread():
         
     file = request.files["file"]
     image_file_name = secure_filename(file.filename)
+    if image_file_name == "":
+        return render_template("error.html", message="Muista kuva!")
+
     newfilename = str(random.randint(10000000,100000000))+"."+image_file_name.rsplit(".", 1)[1].lower()
     file.save(os.path.join(app.config["UPLOAD_FOLDER"], newfilename))
     image_file = "static/images/"+str(newfilename)
@@ -107,6 +110,9 @@ def add_reply():
         
         file = request.files["file"]
         image_file_name = secure_filename(file.filename)
+        if image_file_name == "":
+            return render_template("error.html", message="Muista kuva!")
+
         newfilename = str(random.randint(10000000,100000000))+"."+image_file_name.rsplit(".", 1)[1].lower()
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], newfilename))
         image_file = "static/images/"+str(newfilename)
