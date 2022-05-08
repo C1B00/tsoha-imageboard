@@ -5,12 +5,13 @@ def add_thread(image_file, image_file_name, title, message, board_name):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    
-    sql = "INSERT INTO threads (image_file, image_file_name, title, message, user_id, board_name, sent_at) VALUES (:image_file, :image_file_name, :title, :message, :user_id, :board_name, NOW()) RETURNING id"
-    result = db.session.execute(sql, {"image_file":image_file, "image_file_name":image_file_name, "title":title, "message":message, "user_id":user_id, "board_name":board_name})
-    thread_id = result.fetchone()[0]
-    db.session.commit()
-
+    try:
+        sql = "INSERT INTO threads (image_file, image_file_name, title, message, user_id, board_name, sent_at) VALUES (:image_file, :image_file_name, :title, :message, :user_id, :board_name, NOW()) RETURNING id"
+        result = db.session.execute(sql, {"image_file":image_file, "image_file_name":image_file_name, "title":title, "message":message, "user_id":user_id, "board_name":board_name})
+        thread_id = result.fetchone()[0]
+        db.session.commit()
+    except:
+        return False
     return thread_id
 
 def remove_thread(thread_id):
@@ -32,12 +33,14 @@ def add_reply(image_file, image_file_name, title, message, thread_id):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    
-    sql = "INSERT INTO replies (image_file, image_file_name, title, message, user_id, thread_id, sent_at) VALUES (:image_file, :image_file_name, :title, :message, :user_id, :thread_id, NOW())"
-    db.session.execute(sql, {"image_file":image_file, "image_file_name":image_file_name, "title":title, "message":message, "user_id":user_id, "thread_id":thread_id})
-    db.session.commit()
-
-    return user_id
+    try:
+        sql = "INSERT INTO replies (image_file, image_file_name, title, message, user_id, thread_id, sent_at) VALUES (:image_file, :image_file_name, :title, :message, :user_id, :thread_id, NOW()) RETURNING id"
+        result = db.session.execute(sql, {"image_file":image_file, "image_file_name":image_file_name, "title":title, "message":message, "user_id":user_id, "thread_id":thread_id})
+        reply_id = result.fetchone()[0]
+        db.session.commit()
+    except:
+        return False
+    return reply_id
 
 def show_all_replies(thread_id):
     sql = "SELECT R.id, R.image_file, R.title, R.message, U.username, R.sent_at FROM threads T, replies R, users U WHERE R.thread_id=:thread_id AND T.id=R.thread_id AND U.id=R.user_id ORDER BY R.sent_at DESC"
