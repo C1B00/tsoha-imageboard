@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HYchannel</title>
+        <link rel="stylesheet" href="../static/main.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>HYchannel</h1>
+        </div>
+        <hr>
+        <h2>Moderaattorin nurkka</h2>
+        <hr>
+        <div class="remove">
+            <form action="/remove" method="post">
+                Syötä poistettavan langan ID:
+                <p>
+                <input type="text" name="thread_id">
+                <p>
+                <input type="submit" value="Poista lanka">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+        </div>
+    </body>
+</html>

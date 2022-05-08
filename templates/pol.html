@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Politiikka</title>
+        <link rel="stylesheet" href="../static/main.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>Politiikka</h1>
+        </div>
+        <hr>
+        <button class="open-button" onclick="openForm()">Aloita uusi lanka</button>
+        <div class="form-popup" id="new-thread">
+            <form action="/add_thread" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="board" value="pol">
+                Otsikko:
+                <p>
+                <input type="text" name="title">
+                <p>
+                Viesti:
+                <p>
+                <input type="text" name="message">
+                <p>
+                Kuvatiedosto:
+                <p>
+                <input type="file" name="file">
+                <p>
+                <input type="submit" value="Lähetä">
+            </form>
+        </div>
+        <hr>
+        <div class="threads">
+            {% for thread in threads %}
+            <img src={{ thread[1] }} width="200px">
+            <p>
+            <b>{{ thread[2] }}:</b> {{ thread[3] }}
+            <p>
+            Käyttäjältä: <i>{{ thread[4] }}</i>, Aikaan: <i>{{ thread[5].strftime("%Y-%m-%d %H:%M:%S") }}</i>
+            <p>
+                <a href="/reply/{{ thread[0] }}">Näytä koko lanka</a>
+            <hr>
+            {% endfor %}
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("new-thread").style.display="block";
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HYchannel</title>
+        <link rel="stylesheet" href="../static/main.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>HYchannel</h1>
+        </div>
+        <hr>
+        <h2>Rekisteröinti</h2>
+        <div class="register">
+            <form action="/register" method="post">
+                Käyttäjätunnus:
+                <p>
+                <input type="text" name="username">
+                <p>
+                Salasana:
+                <p>
+                <input type="password" name="password1">
+                <p>
+                Salasana uudestaan:
+                <p>
+                <input type="password" name="password2">
+                <p>
+                Valitse käyttäjärooli:
+                <p>
+                <select name="role">
+                    <option value=1>tavallinen käyttäjä
+                    <option value=2>moderaattori
+                </select>
+                <p>
+                <input type="submit" value="Luo uusi tunnus">
+            </form>
+        </div>
+    </body>
+</html>

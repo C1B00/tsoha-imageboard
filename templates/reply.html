@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HYchannel</title>
+        <link rel="stylesheet" href="../static/main.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>{{ id }}</h1>
+        </div>
+        <hr>
+        <button class="open-button" onclick="openForm()">Lähetä uusi vastaus</button>
+        <div class="form-popup" id="new-reply">
+            <form action="/add_reply" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="thread_id" value="{{ id }}">
+                Otsikko:
+                <p>
+                <input type="text" name="title">
+                <p>
+                Viesti:
+                <p>
+                <input type="text" name="message">
+                <p>
+                Kuvatiedosto:
+                <p>
+                <input type="file" name="file">
+                <p>
+                <input type="submit" value="Lähetä">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+        </div>
+        <hr>
+        <div class="threads">
+            {% for thread in first_thread %}
+            <img src=../{{ thread[1] }} width="200px">
+            <p>
+            <b>{{ thread[2] }}:</b> {{ thread[3] }}
+            <p>
+            Käyttäjältä: <i>{{ thread[4] }}</i>, Aikaan: <i>{{ thread[5].strftime("%Y-%m-%d %H:%M:%S") }}</i>
+            <p>
+            Vastauksia: <i>{{ count }}</i>
+            <hr>
+            {% endfor %}
+        </div>
+        <div class="replies">
+            {% for reply in replies %}
+            <img src=../{{ reply[1] }} width="200px">
+            <p>
+            <b>{{ reply[2] }}</b> {{ reply[3] }}
+            <p>
+            Käyttäjältä:<i> {{ reply[4] }}</i>, Aikaan: <i>{{ reply[5].strftime("%Y-%m-%d %H:%M:%S") }}</i>
+            <hr>
+            {% endfor %}
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("new-reply").style.display="block";
+            }
+        </script>
+    </body>
+</html>

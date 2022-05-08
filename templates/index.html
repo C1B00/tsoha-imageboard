@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HYchannel</title>
+        <link rel="stylesheet" href="../static/main.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>HYchannel</h1>
+        </div>
+        <div class="boards">
+            <div class="column">
+                <h3>Keskustakampus</h3>
+                <ul>
+                    <li>
+                        <a class="board-link" href="/philosophy">Filosofia</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/history">Historia</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/languages">Kielet</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/anthropology">Antropologia</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/theology">Teologia</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/law">Oikeustiede</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/edu">Kasvatustieteet</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/pol">Politiikka</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/econ">Taloustiede</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Kumpulan kampus</h3>
+                <ul>
+                    <li>
+                        <a class="board-link" href="/math">Matematiikka</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/physics">Fysiikka</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/chemistry">Kemia</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/cs">TKT</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/geology">Geotieteet</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/geography">Maatiede</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Meilahden kampus</h3>
+                <ul>
+                    <li>
+                        <a class="board-link" href="/med">Lääkis</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/dentistry">Hammaslääkis</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/slp">Logopedia</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/psy">Psykologia</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Viikin kampus</h3>
+                <ul>
+                    <li>
+                        <a class="board-link" href="/animalmed">Eläinlääkis</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/pharma">Farmasia</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/forest">Metsätieteet</a>
+                    </li>
+                    <li>
+                        <a class="board-link" href="/agri">Maataloustieteet</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="login">
+            {% if session.user_id %}
+            <a href="/logout">Kirjaudu ulos</a>
+            {% else %}
+            <form action="/login" method="post">
+                Käyttäjätunnus:
+                <p>
+                <input type="text" name="username">
+                <p>
+                Salasana:
+                <p>
+                <input type="password" name="password">
+                <p>
+            <input type="submit" value="Kirjaudu">
+            </form>
+            Voit luoda uuden tunnuksen <a href="/register">tästä</a>.
+            {% endif %}
+        </div>
+        <div class="admin">
+            {% if session.user_role == 2 %}
+            <a href="/remove">Poista lanka</a>
+            {% endif %}
+        </div>
+    </body>
+</html>
