@@ -30,7 +30,7 @@ def logout():
 def register():
     if request.method == "GET":
         return render_template("register.html")
-        
+
     if request.method == "POST":
         username = request.form["username"]
         if len(username) < 1 or len(username) > 50:
@@ -53,6 +53,7 @@ def register():
 
 @app.route("/add_thread", methods=["POST"])
 def add_thread():
+    users.check_csrf()
     board_name = request.form["board"]
 
     title = request.form["title"]
