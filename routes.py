@@ -12,6 +12,7 @@ def index():
 def login():
     if request.method == "GET":
         return render_template("login.html")
+
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -29,6 +30,7 @@ def logout():
 def register():
     if request.method == "GET":
         return render_template("register.html")
+        
     if request.method == "POST":
         username = request.form["username"]
         if len(username) < 1 or len(username) > 50:
